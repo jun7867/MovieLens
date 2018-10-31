@@ -239,21 +239,61 @@ class FrequentItemsetSize2 implements Comparable
 		return (this.second - p.second) ;
 	}
 }
-
+ ///Sorting 하는 함수 1,2 순서대로. 
 @SuppressWarnings("rawtypes")
 class FrequentItemsetSize3 implements Comparable 
 {
 	int [] items ;
-
+	int first ;
+	int second ;
+	int third;
+	public FrequentItemsetSize3(int first, int second,int third) {
+		if (first <= second) {
+			this.first = first ;
+			this.second = second ;
+		}
+		else if(second <= third) {
+			this.second = third ;
+			this.third = second ;
+		}
+		else if (first <= second) {
+			this.first = first ;
+			this.second = second ;
+		}
+	}
+	
 	FrequentItemsetSize3(Set<Integer> s) {
 		/* TODO: implement this method */
-		
+		Integer [] elem = s.toArray(new Integer[3]) ;
+
+		if (elem[0] < elem[1]) {
+			this.first = elem[0] ;
+			this.second = elem[1] ;
+		}
+		else if(elem[1] < elem[2]) {
+			this.second = elem[1] ;
+			this.third = elem[2] ;
+		}
+		else if(elem[0] < elem[1]) {
+			this.first = elem[0];
+			this.second = elem[1];
+		}
+
 		// values in s must be sorted and save into items array
 	}
 
 	@Override
 	public int compareTo(Object obj) {  // this method is used for sorting when using TreeMap
 		/* TODO: implement this method */
-		return 0 ;
+		FrequentItemsetSize3 p = (FrequentItemsetSize3) obj ;
+		
+		if (this.first < p.first) 
+			return -1 ;
+		if (this.first > p.first)
+			return 1 ;
+
+		return (this.second - p.second) ;
+		
+	
 	}
 }
